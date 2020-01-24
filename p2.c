@@ -44,7 +44,7 @@ int start()
 			mypacman.x=i;   
 			mypacman.y=j;  
 		}
-		if(r=='{' || r=='}' || r==',' || r=='\'')
+		if(r=='{' || r=='}' || r==',' || r=='\'' || r==' ')
 		{
 			continue;
 		}	
@@ -60,12 +60,13 @@ int start()
 		}
 		r=fgetc(ptf);
 	}  
+	fclose(ptf);
 }
 int input()
 {
 	char c1,c2;
 	//if(khbit())
-	{
+//	{
 		c1=getch();
 		if(c1=='1');
 			return 0;
@@ -126,7 +127,8 @@ int input()
 				}
 			}
 			if((int)c2==75)//left
-			{	if(playfiled[mypacman.x][mypacman.y-1]=='*')
+			{
+				if(playfiled[mypacman.x][mypacman.y-1]=='*')
 				{
 					numberOfFood--;
 				}
@@ -135,7 +137,6 @@ int input()
 					gotoxy(0 ,6);
 					printf("You can’t move there! There is an obstacle");
 				}	
-			
 				else if(mypacman.y==0)
 				{
 					gotoxy(0 ,6);
@@ -152,7 +153,7 @@ int input()
 					sleep(1);
 				}
 			}
-				if((int)c2==77)//right
+			if((int)c2==77)//right
 			{
 				if(playfiled[mypacman.x][mypacman.y+1]=='*')
 				{
@@ -170,7 +171,6 @@ int input()
 				}
 				else
 				{
-					//mypacman.y++;
 					gotoxy(mypacman.y+1 ,mypacman.x);
 					printf("\b%c" ,1);
 					sleep(1);
@@ -181,7 +181,7 @@ int input()
 				}
 			}
 		}
-	}
+//	}
 }
 int main(){
 	if(start()==0)
@@ -190,10 +190,6 @@ int main(){
 	}
 	int result=input();
 	while(result!=0 && numberOfFood!=0);
-//	if(result==0){
-//		gotoxy(0,6)
-//		printf("The game has end");
-//	}
 	if(numberOfFood==0)
 	{
 		gotoxy(0,6);
