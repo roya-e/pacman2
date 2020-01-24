@@ -39,14 +39,18 @@ int start()
 	while(r!=EOF)
 	{
 		if(r=='*')
-			numberOfFood++;	///////////
+			numberOfFood++;	
 		if(r=='0'){
-			mypacman.x=i;   //////////
-			mypacman.y=j;  //////////
+			mypacman.x=i;   
+			mypacman.y=j;  
+		}
+		if(r=='{' || r=='}' || r==',' || r=='\'')
+		{
+			continue;
 		}	
-		if(r!='\n') 
+		else if(r!='\n') 
 			playfiled[i][j]=r;
-		if(r='\n')
+		else if(r=='\n')
 		{
 			j++;
 		}
@@ -199,3 +203,12 @@ int main(){
 	gotoxy(10,10);
 	printf("The Game Has End");
 }
+//////////////////////////////////////////////////////////////1.dibag kardan
+//////////////////////////////////////////////////////////////2. ezafe kardan doshman wa score?! ya kaar ba geraphics
+
+
+
+
+
+
+
