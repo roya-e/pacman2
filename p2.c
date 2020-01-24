@@ -20,7 +20,7 @@ void gotoxy( int x, int y)
 	coord.Y= y; 
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE); 
 	SetConsoleCursorPosition( handle, coord); 
-} 
+}
 int start()
 {
 	int i=0,j=0;
@@ -35,30 +35,32 @@ int start()
 		printf("\nERROR : Cant open the file");
 		return 0;
 	}
-	r=fgetc(ptf);
-	while(r!=EOF)
+	
+	while(feof(ptf)==0)
 	{
+		r=fgetc(ptf);
 		if(r=='*')
 			numberOfFood++;	
 		if(r=='0'){
 			mypacman.x=i;   
 			mypacman.y=j;  
 		}
-		if(r=='{' || r=='}' || r==',' || r=='\'' || r==' ')
+		if(r=='{' || r=='}' || r==',' || r=='\\' || r==' ')
 		{
 			continue;
 		}	
-		else if(r!='\n') 
+		if(r=='1' || r=='0' || r=='*' || r=='#') 
+		{
 			playfiled[i][j]=r;
-		else if(r=='\n')
-		{
-			j++;
-		}
-		else
-		{
 			i++;
 		}
-		r=fgetc(ptf);
+			
+		if(r=='\n')
+		{
+			j++;
+			i=0;
+		}
+		
 	}  
 	fclose(ptf);
 }
@@ -87,7 +89,7 @@ int input()
 				else if(mypacman.x==0)
 				{
 					gotoxy(0 ,6);
-					printf("You can’t move there! There is a wall");
+					printf("You can’t move there! There is a wall"); 
 				}
 				else
 				{
@@ -183,7 +185,8 @@ int input()
 		}
 //	}
 }
-int main(){
+int main()
+{
 	if(start()==0)
 	{
 		return 0;
